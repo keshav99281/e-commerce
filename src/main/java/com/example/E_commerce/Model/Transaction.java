@@ -10,45 +10,45 @@ public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "transaction_id")
-    private long transaction_id;
-    @Column(name = "user_id")
-    private long user_id;
-    @Column(name = "order_id")
-    private long order_id;
+    @Column(name = "transactionId")
+    private long transactionId;
+    @Column(name = "userId")
+    private long userId;
+    @Column(name = "orderId")
+    private long orderId;
     @Column(name = "price")
     private BigDecimal price;
 
     public Transaction() {
     }
 
-    public Transaction(long user_id, long order_id) {
-        this.user_id = user_id;
-        this.order_id = order_id;
+    public Transaction(long userId, long orderId) {
+        this.userId = userId;
+        this.orderId = orderId;
     }
 
-    public long getTransaction_id() {
-        return transaction_id;
+    public long getTransactionId() {
+        return transactionId;
     }
 
-    public void setTransaction_id(long transaction_id) {
-        this.transaction_id = transaction_id;
+    public void setTransactionId(long transactionId) {
+        this.transactionId = transactionId;
     }
 
-    public long getUser_id() {
-        return user_id;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
-    public long getOrder_id() {
-        return order_id;
+    public long getOrderId() {
+        return orderId;
     }
 
-    public void setOrder_id(long order_id) {
-        this.order_id = order_id;
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
     }
 
     public BigDecimal getPrice() {

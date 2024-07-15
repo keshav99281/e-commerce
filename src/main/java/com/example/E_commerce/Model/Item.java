@@ -9,10 +9,10 @@ import java.math.BigDecimal;
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "item_id")
-    private long item_id;
-    @Column(name = "item_name", unique = true)
-    private String item_name;
+    @Column(name = "itemId")
+    private long itemId;
+    @Column(name = "itemName", unique = true)
+    private String itemName;
     private BigDecimal price;
     private long quantity;
 
@@ -20,25 +20,25 @@ public class Item {
     }
 
     public Item(String itemName, BigDecimal price, long quantity) {
-        this.item_name = itemName;
+        this.itemName = itemName;
         this.price = price;
         this.quantity = quantity;
     }
 
-    public long getItem_id() {
-        return item_id;
+    public long getItemId() {
+        return itemId;
     }
 
-    public void setItem_id(long item_id) {
-        this.item_id = item_id;
+    public void setItemId(long itemId) {
+        this.itemId = itemId;
     }
 
-    public String getItem_name() {
-        return item_name;
+    public String getItemName() {
+        return itemName;
     }
 
-    public void setItem_name(String item_name) {
-        this.item_name = item_name;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
     public BigDecimal getPrice() {

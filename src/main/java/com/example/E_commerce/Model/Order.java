@@ -9,47 +9,47 @@ import java.math.BigDecimal;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
-    private long order_id;
-    @Column(name = "user_id")
-    private long user_id;
-    @Column(name = "item_id")
-    private long item_id;
+    @Column(name = "orderId")
+    private long orderId;
+    @Column(name = "userId")
+    private long userId;
+    @Column(name = "itemId")
+    private long itemId;
     private long quantity;
-    @Column(name = "order_price")
-    private BigDecimal order_price;
+    @Column(name = "orderPrice")
+    private BigDecimal orderPrice;
 
     public Order() {
     }
 
     public Order(long userid, long itemId, long quantity) {
-        this.user_id = userid;
-        this.item_id = itemId;
+        this.userId = userid;
+        this.itemId = itemId;
         this.quantity = quantity;
     }
 
-    public long getOrder_id() {
-        return order_id;
+    public long getOrderId() {
+        return orderId;
     }
 
-    public void setOrder_id(long order_id) {
-        this.order_id = order_id;
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
     }
 
-    public long getUser_id() {
-        return user_id;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
-    public long getItem_id() {
-        return item_id;
+    public long getItemId() {
+        return itemId;
     }
 
-    public void setItem_id(long item_id) {
-        this.item_id = item_id;
+    public void setItemId(long itemId) {
+        this.itemId = itemId;
     }
 
     public long getQuantity() {
@@ -60,11 +60,11 @@ public class Order {
         this.quantity = quantity;
     }
 
-    public BigDecimal getOrder_price() {
-        return order_price;
+    public BigDecimal getOrderPrice() {
+        return orderPrice;
     }
 
-    public void setOrder_price(BigDecimal order_price) {
-        this.order_price = order_price;
+    public void setOrderPrice(BigDecimal orderPrice) {
+        this.orderPrice = orderPrice;
     }
 }
