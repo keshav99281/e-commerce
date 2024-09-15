@@ -5,6 +5,7 @@ import com.example.E_commerce.Model.Order;
 
 import com.example.E_commerce.Repository.ItemRepository;
 import com.example.E_commerce.Repository.OrderRepository;
+import com.example.E_commerce.Repository.TransactionRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,8 @@ public class OrderService {
     private OrderRepository orderRepository;
     @Autowired
     private ItemRepository itemRepository;
+    @Autowired
+    private TransactionRepository transactionRepository;
 
     public String AddOrder(long userId, long itemId, long quantity){
         Optional<Item> oldItem = itemRepository.findById((int) itemId);
@@ -36,7 +39,7 @@ public class OrderService {
         }else return "Order can't be placed!!Either the stock or oldItem is not available";
     }
 
-    public List<Order> GetOrderUser(long id){
+    public List<Order> GetOrderUser(int id){
         return orderRepository.findByUserId(id);
     }
 
@@ -46,13 +49,17 @@ public class OrderService {
     @Transactional
     public String DeleteOrder(int id){
         Optional<Order> optionalOrder = orderRepository.findById(id);
-        Order order = optionalOrder.get();
-        Optional<Item> item = itemRepository.findById((int)orderRepository.findById((int)id).get().getItemId());
-        orderRepository.deleteById((int) id);
-        Item item1 = item.get();
-        item1.setQuantity(item1.getQuantity()+order.getQuantity());
-        itemRepository.save(item1);
-        return "Order Cancelled:"+id;
+        if (optionalOrder.isPresent()) {
+            Order order = optionalOrder.get();
+            Optional<Item> item = itemRepository.findById((int) optionalOrder.get().getItemId());
+            orderRepository.deleteById(id);
+                Item item1 = item.get();
+                item1.setQuantity(item1.getQuantity() + order.getQuantity());
+                itemRepository.save(item1);
+            return "Order Cancelled:" + id;
+        }else {
+            return "Order with "+id+"not found!!";
+        }
     }
 
 }
