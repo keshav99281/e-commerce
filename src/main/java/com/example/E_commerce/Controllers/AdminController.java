@@ -26,12 +26,12 @@ public class AdminController {
     @Autowired
     private TransactionService transactionService;
 
-    @GetMapping("/user/getAll")
+    @GetMapping("/user/getAll")//working
     public List<User> GetAllUsers(){
         return userService.GetAll();
     }
 
-    @DeleteMapping("/user/delete/{id}")//userId
+    @DeleteMapping("/user/delete/{id}")//working
     public String DeleteUser(@PathVariable int id){
         return userService.Delete(id);
     }
@@ -41,49 +41,49 @@ public class AdminController {
         return itemService.addItem(item);
     }
 
-    @GetMapping("/item/getAll")
+    @GetMapping("/item/getAll")//working
     public List<Item> GetAllItem(){
         return itemService.GetAll();
     }
 
-    @PutMapping("/item/update/{id}")//itemId
-    public String updateItem(@PathVariable int id,@RequestBody Item item){
-        return itemService.Update(id,item.getItemName(),item.getPrice(),item.getQuantity());
+    @PutMapping("/item/update/{itemId}")//
+    public String updateItem(@PathVariable int itemId,@RequestParam int quantity){
+        return itemService.updateItemQuantity(itemId,quantity);
     }
 
-    @DeleteMapping("/item/delete/{id}")//itemId
-    public String DeleteItem(@PathVariable int id){
-        return itemService.DeleteById(id);
+    @DeleteMapping("/item/delete/{itemId}")//
+    public String DeleteItem(@PathVariable int itemId){
+        return itemService.DeleteById(itemId);
     }
 
     @GetMapping("/order/getOrders")
     public List<Order> GetAllOrders(){
-        return orderService.GetOrderAdmin();
+        return orderService.GetAllOrders();
     }
 
-    @GetMapping("/order/getOrders/{id}")//userId
-    public List<Order> GetAllOrders(@PathVariable int id){
-        return orderService.GetOrderUser(id);
+    @GetMapping("/order/getOrders/{userId}")//
+    public List<Order> GetAllOrders(@PathVariable int userId){
+        return orderService.GetUserOrders(userId);
     }
 
-    @DeleteMapping("/order/deleteOrder/{id}")//orderId
-    public String deleteOrder(@PathVariable int id){
-        return orderService.DeleteOrder(id);
+    @DeleteMapping("/order/deleteOrder/{orderId}")//
+    public String deleteOrder(@PathVariable int orderId){
+        return orderService.DeleteOrder(orderId);
     }
 
     @GetMapping("transaction/getAll")
-    public List<Transaction> GetAll(){
-        return transactionService.GetAll();
+    public List<Transaction> GetAllTransaction(){
+        return transactionService.GetAllTransaction();
     }
 
-    @GetMapping("transaction/user/getAll/{id}")//userId
-    public List<Transaction> GetAllUserTransaction(@PathVariable int id){
-        return transactionService.GetUserTransaction(id);
+    @GetMapping("transaction/user/getAll/{userId}")//
+    public List<Transaction> GetAllUserTransaction(@PathVariable int userId){
+        return transactionService.GetUserTransaction(userId);
     }
 
-    @GetMapping("transaction/item/getAll/{id}")//itemId
-    public List<Transaction> GetAllItemTransaction(@PathVariable int id){
-        return transactionService.GetItemTransaction(id);
+    @GetMapping("transaction/item/getAll/{itemId}")//
+    public List<Transaction> GetAllItemTransaction(@PathVariable int itemId){
+        return transactionService.GetItemTransaction(itemId);
     }
 
 }

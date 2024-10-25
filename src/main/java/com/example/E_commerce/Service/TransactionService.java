@@ -21,28 +21,28 @@ public class TransactionService {
     @Autowired
     private UserRepository userRepository;
 
-    public Transaction Addtransaction(int id){
+    public Transaction Addtransaction(int orderId){
         Transaction transaction = new Transaction();
-        Optional<Order> order = orderRepository.findById(id);
+        Optional<Order> order = orderRepository.findById(orderId);
         if (order.isPresent()){
             Order newOrder = order.get();
             transaction.setUserId(newOrder.getUserId());
-            transaction.setOrderId(id);
+            transaction.setOrderId(orderId);
             transaction.setPrice(newOrder.getOrderPrice());
             return transactionRepository.save(transaction);
         }else throw new IllegalArgumentException("Order not found!!");
     }
 
-    public List<Transaction> GetUserTransaction(long id){
-        return transactionRepository.findByUserId(id);
+    public List<Transaction> GetUserTransaction(long userId){
+        return transactionRepository.findByUserId(userId);
     }
 
-    public List<Transaction> GetAll(){
+    public List<Transaction> GetAllTransaction(){
         return transactionRepository.findAll();
     }
 
-    public List<Transaction> GetItemTransaction(long id){
-        return transactionRepository.findByOrderId(id);
+    public List<Transaction> GetItemTransaction(long itemId){
+        return transactionRepository.findByOrderId(itemId);
     }
 
 }

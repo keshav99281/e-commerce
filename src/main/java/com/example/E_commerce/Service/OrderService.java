@@ -39,26 +39,26 @@ public class OrderService {
         }else return "Order can't be placed!!Either the stock or oldItem is not available";
     }
 
-    public List<Order> GetOrderUser(int id){
-        return orderRepository.findByUserId(id);
+    public List<Order> GetUserOrders(int userId){
+        return orderRepository.findByUserId(userId);
     }
 
-    public List<Order> GetOrderAdmin(){
+    public List<Order> GetAllOrders(){
         return orderRepository.findAll();
     }
     @Transactional
-    public String DeleteOrder(int id){
-        Optional<Order> optionalOrder = orderRepository.findById(id);
+    public String DeleteOrder(int orderId){
+        Optional<Order> optionalOrder = orderRepository.findById(orderId);
         if (optionalOrder.isPresent()) {
             Order order = optionalOrder.get();
             Optional<Item> item = itemRepository.findById((int) optionalOrder.get().getItemId());
-            orderRepository.deleteById(id);
+            orderRepository.deleteById(orderId);
                 Item item1 = item.get();
                 item1.setQuantity(item1.getQuantity() + order.getQuantity());
                 itemRepository.save(item1);
-            return "Order Cancelled:" + id;
+            return "Order Cancelled:" + orderId;
         }else {
-            return "Order with "+id+"not found!!";
+            return "Order with "+ orderId +"not found!!";
         }
     }
 

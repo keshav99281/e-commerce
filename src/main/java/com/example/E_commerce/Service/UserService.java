@@ -7,6 +7,7 @@ import com.example.E_commerce.Repository.TransactionRepository;
 import com.example.E_commerce.Repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,28 +25,32 @@ public class UserService {
     @Autowired
     private OrderService orderService;
 
-    public User addUser(User user){ //checked
-        return userRepository.save(user);
+    public ResponseEntity<?> addUser(User user){//checked+working
+        if(userRepository.existsByUserName(user.getUserName()) || userRepository.existsByPassword(user.getPassword())){
+            return ResponseEntity.badRequest().body("User already exists!!");
+        }
+        userRepository.save(user);
+        return ResponseEntity.ok().body(user.getName()+", thanks for joining us!!");
     }
 
-    public List<User> GetAll(){ //checked
+    public List<User> GetAll(){ //checked+working
         return userRepository.findAll();
     }
     @Transactional
-    public String Delete(int id){//checked
-        Optional<User> user = userRepository.findById(id);
+    public String Delete(int userId){//checked+working
+        Optional<User> user = userRepository.findById(userId);
         if (user.isPresent()){
             User user1 = user.get();
             String name = user1.getName();
-            List<Order> orders = orderService.GetOrderUser(id);
-            userRepository.deleteById(id);
+            List<Order> orders = orderService.GetUserOrders(userId);
+            userRepository.deleteById(userId);
             return name+" Has been removed!!";
         }else{
-            return "User with id "+id+" not found.";
+            return "User with userId "+ userId +" not found.";
         }
     }
 
-    public String Update(int id,String newName,String newUsername,String newPassword){ //checked
+    public String Update(int id,String newName,String newUsername,String newPassword){ //checked+working
         Optional<User> user = userRepository.findById(id);
         if(user.isPresent()){
             User newUser = user.get();
@@ -66,7 +71,7 @@ public class UserService {
                     user.setName(newValue);
                     break;
                 case "username":
-                    user.setUsername(newValue);
+                    user.setUserName(newValue);
                     break;
                 case "password":
                     user.setPassword(newValue);
