@@ -42,9 +42,9 @@ public class UserController {
         return userService.Update(userId, user.getName(), user.getUserName(), user.getPassword());
     }
 
-    @PostMapping("/order/add/{userId}")
-    public String AddOrder(@PathVariable long id ,@RequestBody Order order){
-        return orderService.AddOrder(id,order.getItemId(),order.getQuantity());
+    @PostMapping("/order/add/{userId}")//working
+    public String AddOrder(@PathVariable long userId ,@RequestBody Order order){
+        return orderService.AddOrder(userId,order.getItemId(),order.getQuantity());
     }
 
     @GetMapping("/order/getOrders/{userId}")

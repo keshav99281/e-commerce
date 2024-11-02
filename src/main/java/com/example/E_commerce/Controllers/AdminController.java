@@ -46,7 +46,7 @@ public class AdminController {
         return itemService.GetAll();
     }
 
-    @PutMapping("/item/update/{itemId}")//
+    @PutMapping("/item/update/{itemId}")//working
     public String updateItem(@PathVariable int itemId,@RequestParam int quantity){
         return itemService.updateItemQuantity(itemId,quantity);
     }
@@ -66,7 +66,7 @@ public class AdminController {
         return orderService.GetUserOrders(userId);
     }
 
-    @DeleteMapping("/order/deleteOrder/{orderId}")//
+    @DeleteMapping("/order/deleteOrder/{orderId}")//working
     public String deleteOrder(@PathVariable int orderId){
         return orderService.DeleteOrder(orderId);
     }
@@ -81,9 +81,6 @@ public class AdminController {
         return transactionService.GetUserTransaction(userId);
     }
 
-    @GetMapping("transaction/item/getAll/{itemId}")//
-    public List<Transaction> GetAllItemTransaction(@PathVariable int itemId){
-        return transactionService.GetItemTransaction(itemId);
-    }
+
 
 }

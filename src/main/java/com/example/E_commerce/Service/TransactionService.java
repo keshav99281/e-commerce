@@ -41,8 +41,4 @@ public class TransactionService {
         return transactionRepository.findAll();
     }
 
-    public List<Transaction> GetItemTransaction(long itemId){
-        return transactionRepository.findByOrderId(itemId);
-    }
-
 }
