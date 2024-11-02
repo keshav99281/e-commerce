@@ -1,8 +1,10 @@
 package com.example.E_commerce.Controllers;
 
+import com.example.E_commerce.Model.Item;
 import com.example.E_commerce.Model.Order;
 import com.example.E_commerce.Model.Transaction;
 import com.example.E_commerce.Model.User;
+import com.example.E_commerce.Service.ItemService;
 import com.example.E_commerce.Service.OrderService;
 import com.example.E_commerce.Service.TransactionService;
 import com.example.E_commerce.Service.UserService;
@@ -22,10 +24,17 @@ public class UserController {
     private OrderService orderService;
     @Autowired
     private TransactionService transactionService;
+    @Autowired
+    private ItemService itemService;
 
     @PostMapping("/register")//working
     public ResponseEntity<?> Register(@RequestBody User user){
         return userService.addUser(user);
+    }
+
+    @GetMapping("/item/getAll")//working
+    public List<Item> GetAllItem(){
+        return itemService.GetAll();
     }
 
     @PutMapping("/update/{userId}")//working
