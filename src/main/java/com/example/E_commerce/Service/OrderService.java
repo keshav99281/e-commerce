@@ -51,12 +51,16 @@ public class OrderService {
         Optional<Order> optionalOrder = orderRepository.findById(orderId);
         if (optionalOrder.isPresent()) {
             Order order = optionalOrder.get();
-            Optional<Item> item = itemRepository.findById((int) optionalOrder.get().getItemId());
-            orderRepository.deleteById(orderId);
-                Item item1 = item.get();
-                item1.setQuantity(item1.getQuantity() + order.getQuantity());
-                itemRepository.save(item1);
-            return "Order Cancelled:" + orderId;
+            Optional<Item> optionalItem = itemRepository.findById((int)order.getItemId());
+            if(optionalItem.isPresent()){
+                Item item = optionalItem.get();
+                item.setQuantity(item.getQuantity()+order.getQuantity());
+                orderRepository.deleteById(orderId);
+                itemRepository.save(item);
+                return "Order cancelled"+orderId;
+            }else{
+                return "Item associated with order " + orderId + " not found!";
+            }
         }else {
             return "Order with "+ orderId +"not found!!";
         }
