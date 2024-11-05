@@ -5,6 +5,7 @@ import com.example.E_commerce.Model.Transaction;
 import com.example.E_commerce.Repository.OrderRepository;
 import com.example.E_commerce.Repository.TransactionRepository;
 import com.example.E_commerce.Repository.UserRepository;
+import com.example.E_commerce.ServiceInterface.TransactionServiceInterf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TransactionService {
+public class TransactionService implements TransactionServiceInterf {
 
     @Autowired
     private TransactionRepository transactionRepository;

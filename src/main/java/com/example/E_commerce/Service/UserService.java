@@ -5,6 +5,7 @@ import com.example.E_commerce.Model.User;
 import com.example.E_commerce.Repository.OrderRepository;
 import com.example.E_commerce.Repository.TransactionRepository;
 import com.example.E_commerce.Repository.UserRepository;
+import com.example.E_commerce.ServiceInterface.UserServiceInterf;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService implements UserServiceInterf {
 
     @Autowired
     private UserRepository userRepository;

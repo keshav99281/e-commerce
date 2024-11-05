@@ -7,6 +7,7 @@ import com.example.E_commerce.Model.Transaction;
 import com.example.E_commerce.Repository.ItemRepository;
 import com.example.E_commerce.Repository.OrderRepository;
 import com.example.E_commerce.Repository.TransactionRepository;
+import com.example.E_commerce.ServiceInterface.OrderServiceInterf;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class OrderService {
+public class OrderService implements OrderServiceInterf {
     @Autowired
     private OrderRepository orderRepository;
     @Autowired
@@ -45,8 +46,6 @@ public class OrderService {
         order.setQuantity(quantity);
         order.setOrderPrice(price);
         orderRepository.save(order);
-
-        System.out.println("Current item quantity: "+oldItem.get().getQuantity());
 
         //update item quantity
         Item item = oldItem.get();
