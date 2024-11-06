@@ -9,6 +9,7 @@ import com.example.E_commerce.Service.OrderService;
 import com.example.E_commerce.Service.TransactionService;
 import com.example.E_commerce.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -72,12 +73,12 @@ public class AdminController {
     }
 
     @GetMapping("transaction/getAll")
-    public List<Transaction> GetAllTransaction(){
+    public ResponseEntity<?> GetAllTransaction(){
         return transactionService.GetAllTransaction();
     }
 
     @GetMapping("transaction/user/getAll/{userId}")//
-    public List<Transaction> GetAllUserTransaction(@PathVariable int userId){
+    public ResponseEntity<?> GetAllUserTransaction(@PathVariable int userId){
         return transactionService.GetUserTransaction(userId);
     }
 

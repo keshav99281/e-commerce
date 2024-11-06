@@ -53,12 +53,12 @@ public class UserController {
     }
 
     @PostMapping("/order/confirm/{orderId}")
-    public Transaction ConfirmOrder(@PathVariable int orderId){
-        return transactionService.Addtransaction(orderId);
+    public ResponseEntity<?> ConfirmOrder(@PathVariable int orderId){
+        return transactionService.addTransaction(orderId);
     }
 
     @GetMapping("transaction/getAll/{userId}")
-    public List<Transaction> GetAllUserTransaction(@PathVariable int userId){
+    public ResponseEntity<?> GetAllUserTransaction(@PathVariable int userId){
         return transactionService.GetUserTransaction(userId);
     }
 
